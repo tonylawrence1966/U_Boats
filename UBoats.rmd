@@ -25,7 +25,6 @@ library(ggmap)
 library(ggplot2)
 library(ggrepel)
 library(magrittr)
-library(pander)
 library(rvest)
 library(scales)
 library(stringr)
@@ -387,18 +386,6 @@ ggplot(data = loss.by.month.fate, aes(x = as.Date(Date), y = Ships.Hit, fill = F
 
 #### Hits by nation
 
-A summary table of the nations that suffered the most hits.
-
-```{r}
-national.summary <- ship.data %>%
-  group_by(Nationality) %>%
-  summarise(Ships.Hit = n(),
-            Tons.Lost = sum(Tons)) %>%
-  arrange(desc(Ships.Hit))
-
-pander(head(national.summary, 20))
-```
-
 A function to visualise hits by nation.
 
 ```{r}
@@ -605,7 +592,6 @@ top.boats <- ship.data %>%
   summarise(Ships.Hit = n()) %>%
   arrange(desc(Ships.Hit)) %>%
   head(5)
-pander(top.boats)
 boat.career.plotter(top.boats$U.Boat)[[1]]
 
 comm.career.plotter(c("Johann Mohr", "Erich Topp"))[[1]]
@@ -618,7 +604,6 @@ top.comms <- ship.data %>%
   summarise(Ships.Hit = n()) %>%
   arrange(desc(Ships.Hit)) %>%
   head(5)
-pander(top.comms)
 comm.career.plotter(top.comms$Commander)[[2]]
 ```
 

@@ -16,7 +16,6 @@ library(ggmap)
 library(ggplot2)
 library(ggrepel)
 library(magrittr)
-library(pander)
 library(rvest)
 library(scales)
 library(stringr)
@@ -386,64 +385,6 @@ ggplot(data = loss.by.month.fate, aes(x = as.Date(Date), y = Ships.Hit, fill = F
 
 #### Hits by nation
 
-A summary table of the nations that suffered the most hits.
-
-
-```r
-national.summary <- ship.data %>%
-  group_by(Nationality) %>%
-  summarise(Ships.Hit = n(),
-            Tons.Lost = sum(Tons)) %>%
-  arrange(desc(Ships.Hit))
-
-pander(head(national.summary, 20))
-```
-
-
--------------------------------------
- Nationality   Ships.Hit   Tons.Lost 
-------------- ----------- -----------
-     UK          1661       9114250  
-
-     USA          549       3310369  
-
-   Norway         314       1474885  
-
- Netherlands      137       766985   
-
-   Greece         123       538778   
-
-    USSR          106       153568   
-
-   Sweden         89        275983   
-
-   Panama         82        455138   
-
-   Canada         66        204950   
-
-   France         44        159866   
-
-   Belgium        35        202642   
-
-    Egypt         32         29150   
-
-   Brazil         31        121251   
-
-   Denmark        28         63892   
-
-   Finland        24         42692   
-
- Yugoslavia       15         61703   
-
-   Estonia        12         20907   
-
-  Honduras        11         24651   
-
-   Iceland         9         5851    
-
-  Palestine        9         1504    
--------------------------------------
-
 A function to visualise hits by nation.
 
 
@@ -520,7 +461,7 @@ Some examples of `national.loss.plotter()`
 national.loss.plotter("UK")[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-1.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-1.png)\
 
 ```r
 national.loss.plotter("UK")[[2]]
@@ -530,25 +471,25 @@ national.loss.plotter("UK")[[2]]
 ## Warning: Removed 186 rows containing missing values (geom_point).
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-2.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-2.png)\
 
 ```r
 national.loss.plotter(c("Estonia", "Latvia", "Lithuania"))[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-3.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-3.png)\
 
 ```r
 national.loss.plotter(c("Estonia", "Latvia", "Lithuania"), ship.labels = "yes")[[2]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-4.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-4.png)\
 
 ```r
 national.loss.plotter("Palestine", map = med.map)[[2]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-5.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-5.png)\
 
 ```r
 national.loss.plotter("USSR", map = north.map)[[2]]
@@ -558,7 +499,7 @@ national.loss.plotter("USSR", map = north.map)[[2]]
 ## Warning: Removed 41 rows containing missing values (geom_point).
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-10-6.png)\
+![](UBoats_files/figure-html/unnamed-chunk-9-6.png)\
 
 
 ### The Careers of U-boats and Commanders
@@ -683,25 +624,25 @@ Some examples. Labelling the data with the names of ships and dates hit makes us
 boat.career.plotter(c("U-37", "U-552"))[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-1.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-1.png)\
 
 ```r
 boat.career.plotter(c("U-31", "U-504"), ship.labels = "yes")[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-2.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-2.png)\
 
 ```r
 boat.career.plotter(c("U-37", "U-552"))[[2]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-3.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-3.png)\
 
 ```r
 boat.career.plotter("U-65", ship.labels = "yes")[[2]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-4.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-4.png)\
 
 ```r
 top.boats <- ship.data %>%
@@ -709,41 +650,22 @@ top.boats <- ship.data %>%
   summarise(Ships.Hit = n()) %>%
   arrange(desc(Ships.Hit)) %>%
   head(5)
-pander(top.boats)
-```
-
-
---------------------
- U.Boat   Ships.Hit 
--------- -----------
-  U-37       56     
-
-  U-48       55     
-
- U-124       52     
-
- U-123       50     
-
- U-103       48     
---------------------
-
-```r
 boat.career.plotter(top.boats$U.Boat)[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-5.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-5.png)\
 
 ```r
 comm.career.plotter(c("Johann Mohr", "Erich Topp"))[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-6.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-6.png)\
 
 ```r
 comm.career.plotter("Johann-Otto Krieg", ship.labels = "yes")[[1]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-7.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-7.png)\
 
 ```r
 comm.career.plotter(c("Johann Mohr", "Erich Topp"))[[2]]
@@ -753,13 +675,13 @@ comm.career.plotter(c("Johann Mohr", "Erich Topp"))[[2]]
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-8.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-8.png)\
 
 ```r
 comm.career.plotter(c("Kurt Baberg", "Friedrich Steinhoff"), ship.labels = "yes")[[2]]
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-9.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-9.png)\
 
 ```r
 top.comms <- ship.data %>%
@@ -767,25 +689,6 @@ top.comms <- ship.data %>%
   summarise(Ships.Hit = n()) %>%
   arrange(desc(Ships.Hit)) %>%
   head(5)
-pander(top.comms)
-```
-
-
----------------------------
-   Commander     Ships.Hit 
---------------- -----------
-Otto Kretschmer     52     
-
- Wolfgang Lüth      49     
-
-Joachim Schepke     41     
-
-  Erich Topp        40     
-
- Günther Prien      39     
----------------------------
-
-```r
 comm.career.plotter(top.comms$Commander)[[2]]
 ```
 
@@ -793,5 +696,5 @@ comm.career.plotter(top.comms$Commander)[[2]]
 ## Warning: Removed 21 rows containing missing values (geom_point).
 ```
 
-![](UBoats_files/figure-html/unnamed-chunk-12-10.png)\
+![](UBoats_files/figure-html/unnamed-chunk-11-10.png)\
 
